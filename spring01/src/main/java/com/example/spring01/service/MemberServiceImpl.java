@@ -10,46 +10,42 @@ import com.example.spring01.model.dao.MemberDAO;
 import com.example.spring01.model.dto.MemberDTO;
 
 @Service //현재 클래스를 스프링에서 관리하는 service bean으로 설정
-// 1개의 Service 가 1개 또는 여러개의 dao를 다룬다.
+//1개의 Service가 1개 또는 여러개의 dao를 다룬다.
 public class MemberServiceImpl implements MemberService {
-	//dao 인스턴스 주입
-	@Inject
-	MemberDAO memberdao;
 	
+	//dao 인스턴스를 주입
+	@Inject
+	MemberDAO memberDao;
+
 	@Override
 	public List<MemberDTO> memberList() {
-		
-		return memberdao.memberList();
+		return memberDao.memberList();
 	}
 
 	@Override
 	public void insertMember(MemberDTO dto) {
-		memberdao.insertMember(dto);
-
+		memberDao.insertMember(dto);
 	}
 
 	@Override
 	public MemberDTO viewMember(String userid) {
-		// TODO Auto-generated method stub
-		return null;
+		return memberDao.viewMember(userid);
 	}
 
 	@Override
 	public void deleteMember(String userid) {
-		// TODO Auto-generated method stub
-
+		memberDao.deleteMember(userid);
 	}
 
 	@Override
 	public void updateMember(MemberDTO dto) {
-		// TODO Auto-generated method stub
+		memberDao.updateMember(dto);
 
 	}
 
 	@Override
 	public boolean checkPw(String userid, String passwd) {
-		// TODO Auto-generated method stub
-		return false;
+		return memberDao.checkPw(userid, passwd);
 	}
 
 }
