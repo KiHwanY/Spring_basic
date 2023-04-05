@@ -43,5 +43,10 @@ public class MemoDTO {
 			this.writer = writer;
 			this.memo = memo;
 		}
+		public MemoDTO() {
+			
+			// TODO Auto-generated constructor stub
+		}
+		
 
 }
