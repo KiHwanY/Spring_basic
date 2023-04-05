@@ -45,7 +45,7 @@ public class MemoDTO {
 		}
 		public MemoDTO() {
 			
-			// TODO Auto-generated constructor stub
+			
 		}
 		
 
