@@ -21,35 +21,38 @@ public class MemoController {
 	MemoService memoService;
 	
 	//memo/list.do
-	@RequestMapping("list.do") //세부적인 url pattern
+	@RequestMapping("list.do") //세부적인 url pattern //목록
 	public ModelAndView list(ModelAndView mav) {
 		List<MemoDTO> items=memoService.list();
 		//views/memo/memo_list.jsp
-		mav.setViewName("memo/memo_list"); //포워딩할 뷰의 이름
-		mav.addObject("list", items); //전달할 데이터(모델)
-		return mav; // return new ModelAndView("memo/memo_list", "list",items);
+		mav.setViewName("memo/memo_list"); 
+		//포워딩할 뷰의 이름
+		mav.addObject("list", items); 
+		//전달할 데이터(모델)
+		return mav; 
+		// return new ModelAndView("memo/memo_list", "list",items);
 	}
 	
-	@RequestMapping("insert.do")
+	@RequestMapping("insert.do") // 추가
 	public String insert(@ModelAttribute MemoDTO dto) {
 		memoService.insert(dto);
 		return "redirect:/memo/list.do";//목록갱신요청
 	}
 	
-	@RequestMapping("view/{idx}")
+	@RequestMapping("view/{idx}") // 메모 상세보기
 	public ModelAndView view(@PathVariable int idx, ModelAndView mav) {
 		mav.setViewName("memo/view");//포워딩하는 뷰이름
 		mav.addObject("dto", memoService.memo_view(idx));
 		return mav;
 	}
 	
-	@RequestMapping("update/{idx}")
+	@RequestMapping("update/{idx}") // 수정
 	public String update(@PathVariable int idx, @ModelAttribute MemoDTO dto) {
 		memoService.update(dto);
 		return "redirect:/memo/list.do";//목록갱신요청
 	}
 	
-	@RequestMapping("delete/{idx}")
+	@RequestMapping("delete/{idx}") // 삭제
 	public String delete(@PathVariable int idx) {
 		memoService.delete(idx);
 		return "redirect:/memo/list.do";//목록갱신요청

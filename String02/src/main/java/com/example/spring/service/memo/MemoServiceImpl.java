@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.spring.model.memo.dao.MemoDAO;
 import com.example.spring.model.memo.dto.MemoDTO;
 
-@Service
+@Service // bean 등록
 public class MemoServiceImpl implements MemoService {
 
 	//Service가 DAO를 호출
@@ -18,7 +18,8 @@ public class MemoServiceImpl implements MemoService {
 
 	@Override
 	public List<MemoDTO> list() {
-		return memoDao.list(); //list()는 완성된 인터페이스가 아닌데도
+		return memoDao.list();
+		//list()는 완성된 인터페이스가 아닌데도
 		//쓸 수 있는 이유는 스프링이 root-context.xml에서 지정한 mybatis객체를
 		//메모리에 올려 셋팅에 의해 생성된 객체를 자동 결합시키며 ArrayList로 받아 처리한다.
 	}

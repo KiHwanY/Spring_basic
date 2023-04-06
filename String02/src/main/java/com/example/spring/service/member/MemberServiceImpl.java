@@ -16,20 +16,30 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean loginCheck(MemberDTO dto, HttpSession session) {
-		
-		return false;
+		boolean result =  memberDao.loginCheck(dto);
+		if(result) { // 로그인 성공
+			//세션변수에 값 저장
+			MemberDTO dto2 = viewMember(dto.getUserid());
+			session.setAttribute("userid", dto.getUserid());
+			session.setAttribute("name", dto2.getName());
+			
+			System.out.println(session.getAttribute("userid"));
+			System.out.println(session.getAttribute("name"));
+		}
+		return result;
 	}
 
 	@Override
 	public void logout(HttpSession session) {
-		
-
+		// 세션 초기화
+		session.invalidate();
 	}
 
 	@Override
 	public MemberDTO viewMember(String userid) {
 		
-		return null;
+		return memberDao.viewMember(userid);
+		
 	}
 
 }
