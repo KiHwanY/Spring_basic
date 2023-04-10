@@ -21,6 +21,7 @@
   <tr>
     <td>${row.product_id }</td>
     <td><img src="${path }/images/${row.picture_url}" width="100px" height="100px"> </td>
+    <!-- 상세 화면 페이지 이동 -->
     <td><a href="${path }/shop/product/detail/${row.product_id}">${row.product_name }</a></td>
     <td><fmt:formatNumber  value="${row.price }" pattern="#,###"/> </td>
   </tr>

@@ -64,8 +64,4 @@ public class ProductDTO {
 		return "ProductDTO [product_id=" + product_id + ", product_name=" + product_name + ", price=" + price
 				+ ", description=" + description + ", picture_url=" + picture_url + ", file1=" + file1 + "]";
 	}
-	 
-	 
-	
-	
 }

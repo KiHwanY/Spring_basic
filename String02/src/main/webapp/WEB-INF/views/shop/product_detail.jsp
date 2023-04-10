@@ -9,7 +9,7 @@
 </head>
 <body>
 <%@ include file="../include/menu.jsp" %>
-<h2>삼품 정보</h2>
+<h2>상품 정보</h2>
 <table>
 <tr> 
 	<td><img  src="${path }/images/${dto.picture_url}" width="300px" height="300px"> </td>

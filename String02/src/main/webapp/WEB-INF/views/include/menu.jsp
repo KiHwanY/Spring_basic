@@ -7,7 +7,7 @@
  	<a href="${path }">Home</a> |
 	<a href="${path}/memo/list.do">메모장</a> |
 	<a href="${path}/upload/uploadForm">업로드 테스트</a> | 
-	<a href="${path}/shop/product/list.do">상품 목록</a> |
+	<a href="${path}/shop/product/list.do">상품 목록</a> | <!-- 기능 추가 -->
 	<div style="text-align: right;">
 	<a href="${path}/member/login.do">로그인</a> |
 	</div>
