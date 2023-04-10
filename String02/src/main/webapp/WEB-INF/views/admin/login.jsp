@@ -21,15 +21,15 @@ $(function(){
 			$("#passwd").focus();
 			return;
 		}
-		document.form1.action="${path}/member/login_check.do";
+		document.form1.action="${path}/admin/login_check.do";
 		document.form1.submit();
 	});
 });
 </script>
 </head>
 <body>
-<%@ include file="../include/menu.jsp" %>
-<h2>로그인</h2>
+<%@ include file="../include/admin_menu.jsp" %>
+<h2>관리자 로그인</h2>
 <form name="form1" method="post">
 <table border="1" style="width: 100%;">
 	<tr>
