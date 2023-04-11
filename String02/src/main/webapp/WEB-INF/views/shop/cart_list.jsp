@@ -40,7 +40,7 @@ $(function() {
     <th>금액</th>
      <th>&nbsp;</th>
   </tr>
-  <c:forEach var="row" items="${map.lsit}">
+  <c:forEach var="row" items="${map.list}">
   <tr>
     <td>${row.product_name }</td>
     <td>${row.price }</td>
