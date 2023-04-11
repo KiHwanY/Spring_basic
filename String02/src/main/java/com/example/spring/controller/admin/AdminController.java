@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.spring.model.member.dto.MemberDTO;
 import com.example.spring.service.admin.AdminService;
+import com.example.spring.service.shop.ProductService;
 
 @Controller
 @RequestMapping("admin/*") //공통 url mapping
@@ -16,6 +17,9 @@ public class AdminController {
 
 	@Inject
 	AdminService adminService;
+	
+	@Inject
+	ProductService productService;
 	
 	
 	@RequestMapping("login.do") //세부 url
@@ -48,5 +52,18 @@ public class AdminController {
 		session.invalidate(); //세션 초기화 
 		//관리자 로그인 페이지로 이동
 		return "redirect:/admin/login.do";
+	}
+	
+	
+	@RequestMapping("write.do")
+	public String write() {
+		return "admin/admin_product_write";
+	}
+	
+	@RequestMapping("list.do")
+	public ModelAndView list(ModelAndView mav) {
+		mav.setViewName("/admin/admin_product_list");
+		mav.addObject("list", productService.listProduct());
+		return mav;
 	}
 }

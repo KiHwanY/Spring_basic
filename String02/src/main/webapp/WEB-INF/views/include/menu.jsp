@@ -5,10 +5,13 @@
 
 <div style="text-align: center;">
  	<a href="${path }">Home</a> |
+ 	
+ 	<c:if test="${sessionScope.admin_userid == null }">
 	<a href="${path}/memo/list.do">메모장</a> |
 	<a href="${path}/upload/uploadForm">업로드 테스트</a> | 
 	<a href="${path}/shop/product/list.do">상품 목록</a> | 
-	<c:if test="${sessionScope.userid != null }">
+	</c:if>
+	<c:if test="${sessionScope.userid != null && sessionScope.admin_userid == null }">
 	<a href="${path}/shop/cart/list.do">장바구니</a> |  <!-- 기능 추가  -->
 	</c:if>
 	<div style="text-align: right;">
