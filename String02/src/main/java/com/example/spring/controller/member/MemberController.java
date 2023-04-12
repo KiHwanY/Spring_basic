@@ -11,19 +11,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.spring.model.member.dto.MemberDTO;
 import com.example.spring.service.member.MemberService;
-import com.example.spring.service.memo.MemoService;
 
-@Controller
-@RequestMapping("member/*") //공통 url
+@Controller 
+@RequestMapping("member/*")//공통 url
 public class MemberController {
-
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	//로깅을 위한 변수
+	private static final Logger logger=
+			LoggerFactory.getLogger(MemberController.class);
 	
-	@Inject //DI
+	@Inject
 	MemberService memberService;
-	
-	
-	@RequestMapping("login.do")
+
+	@RequestMapping("login.do")//세부 url
 	public String login() {
 		return "member/login";
 	}
@@ -31,30 +30,26 @@ public class MemberController {
 	@RequestMapping("login_check.do")
 	public ModelAndView login_check(MemberDTO dto, HttpSession session) {
 		//로그인 성공 true, 실패 false
-		
-		boolean result = memberService.loginCheck(dto, session);
-		
-		ModelAndView mav = new ModelAndView();
-		
-		if(result) { // 로그인 성공
+		boolean result=memberService.loginCheck(dto, session);
+		ModelAndView mav=new ModelAndView();
+		if(result) {//로그인 성공
 			mav.setViewName("home");
 		}else {
-			mav.setViewName("member/login");
-			mav.addObject("message", "error");
+			mav.setViewName("member/login");//뷰이름
+			mav.addObject("message", "error");//뷰에 전달할 값
 		}
 		return mav;
 	}
 	
 	@RequestMapping("logout.do")
-	public ModelAndView logout(HttpSession session, ModelAndView mav)	{
-			//세션 초기화
+	public ModelAndView logout(HttpSession session, ModelAndView mav) {
+		//세션초기화
 		memberService.logout(session);
 		//login.jsp로 이동
 		mav.setViewName("member/login");
 		mav.addObject("message", "logout");
 		return mav;
-		
 	}
 	
-	
 }
+
