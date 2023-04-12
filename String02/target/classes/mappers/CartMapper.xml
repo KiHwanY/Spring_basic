@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="cart">
+
 <select id="listCart" resultType="com.example.spring.model.shop.dto.CartDTO">
 select cart_id, m.userid, name, p.product_id, product_name,amount,price,
 price*amount money
@@ -36,6 +37,15 @@ update cart
 set amount = #{amount}
 where  cart_id =#{cart_id}
 </update>
+
+<!-- 상품별 장바구니 금액 통계 -->
+<select id="cart_money" resultType="com.example.spring.model.shop.dto.CartDTO">
+select product_name, nvl(sum(price * amount),0) money
+from cart c,product p 
+where c.product_id=p.product_id 
+group by product_name
+order by product_name
+</select>
 </mapper>
 
 

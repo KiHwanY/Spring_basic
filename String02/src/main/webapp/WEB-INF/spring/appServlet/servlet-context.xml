@@ -17,6 +17,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/include/**" location="/WEB-INF/views/include/"></resources>
 	<resources mapping="/images/**" location="/WEB-INF/views/images/"></resources>
+	<resources mapping="/json/**" location="/WEB-INF/views/json/"></resources>
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 	<beans:bean
