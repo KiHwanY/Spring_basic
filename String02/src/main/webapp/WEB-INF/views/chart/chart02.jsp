@@ -29,6 +29,7 @@ function drawChart(){
     }
         var chart=new google.visualization.PieChart(
     	    document.getElementById("chart_div"));
+    
 /*     var chart=new google.visualization.LineChart(
     	    document.getElementById("chart_div")); */
 
