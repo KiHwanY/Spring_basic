@@ -4,9 +4,9 @@
         <c:set var="path" value="${pageContext.request.contextPath }"/>   
 
 <div style="text-align: center;">
-	<a href="${path}/admin/list.do">상품 목록</a> | 
+	<a href="${path}/admin/list.do">상품 목록</a> |  <!-- 기능 추가  -->
 	<c:if test="${sessionScope.admin_userid != null }">
-	<a href="${path}/admin/write.do">상품등록</a> | 
+	<a href="${path}/admin/write.do">상품등록</a> |  <!-- 관리자 아이디 확인 시 표출 / 기능 추가 -->
 	</c:if>
 	<a href="${path}/pdf/list.do">PDF</a> |
 	<a href="${path }/chart/chart1.do">구글 차트(json)</a> |

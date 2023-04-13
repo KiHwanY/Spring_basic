@@ -57,6 +57,7 @@ public class ProductController {
 		}
 		dto.setPicture_url(filename);
 		productService.insertProduct(dto);
+		// 목록으로 이동
 		return "redirect:/shop/product/list.do";
 	}
 	

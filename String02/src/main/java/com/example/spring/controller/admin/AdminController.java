@@ -51,18 +51,17 @@ public class AdminController {
 		return "redirect:/admin/login.do";
 	}
 	
+	// 상품 등록 폼으로 이동
 	@RequestMapping("write.do")
 	public String write() {
 		return "admin/admin_product_write";
 	}
-	
+	// 상품 목록 페이지 Service 단에 요청
 	@RequestMapping("list.do")
 	public ModelAndView list(ModelAndView mav) {
 		mav.setViewName("/admin/admin_product_list");
 		mav.addObject("list", productService.listProduct());
 		return mav;
 	}
-	
-	
 
 }
