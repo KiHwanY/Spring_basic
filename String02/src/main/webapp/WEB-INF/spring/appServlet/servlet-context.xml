@@ -46,7 +46,7 @@
 		<!-- 인터셉터 호출을 위한 url mapping -->
 		<beans:bean id="loginInterceptor" class="com.example.spring.interceptor.Logininterceptor">	</beans:bean>
 		
-		<beans:bean id="adminInterceptor" class="com.example.spring.interceptor.Admininterceptor"></beans:bean>
+		<beans:bean id="adminInterceptor" class="com.example.spring.interceptor.AdminInterceptor"></beans:bean>
 		<interceptors>
 			<interceptor>
 			<mapping path="/shop/**"/>
