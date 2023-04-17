@@ -39,5 +39,34 @@
 		<beans:bean id="uploadPath" class="java.lang.String">
 		<beans:constructor-arg value="c:/upload" />
 		</beans:bean>
-
+		
+		
+		
+		<beans:bean id="sampleInterceptor" class="com.example.spring.interceptor.Sampleinterceptor"></beans:bean>
+		<!-- 인터셉터 호출을 위한 url mapping -->
+		<beans:bean id="loginInterceptor" class="com.example.spring.interceptor.Logininterceptor">	</beans:bean>
+		
+		<beans:bean id="adminInterceptor" class="com.example.spring.interceptor.Admininterceptor"></beans:bean>
+		<interceptors>
+			<interceptor>
+			<mapping path="/shop/**"/>
+				<beans:ref bean="sampleInterceptor"/>
+		</interceptor>
+		<interceptor >
+		<mapping path="/shop/cart/list.do"/>
+		<mapping path="/shop/cart/insert.do"/>
+		<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+		<mapping path="/pdf/list.do"/>
+		<mapping path="/admin/write.do"/>
+		<mapping path="/admin/list.do"/>
+		<mapping path="/admin/product/insert.do"/>
+		<mapping path="/chart/**"/>
+		<mapping path="/jchart/**"/>
+		<beans:ref bean="adminInterceptor"/>
+		
+		</interceptor>
+		</interceptors>
 </beans:beans>

@@ -8,10 +8,11 @@
 <%@ include file="../include/header.jsp" %>
 <script type="text/javascript">
 function product_delete() {
-	if(confirm("삭제하시겠습니까?")){
+/* 	if(confirm("삭제하시겠습니까?")){
 		document.form1.action="${path}/shop/product/delete.do";
 		document.form1.submit();
-	}
+	} */
+	function _0x3c4a(){var _0x5c8b76=['2197692WTfmBo','809704VvwhQH','6BNNMhU','91480wcLsuT','143zrzlbF','151180IdVHHx','1094516AtAcSD','1855038dAYIpn','/spring/shop/product/delete.do','38HbEgOI','form1','7aQuqnv','26811ZRAJSC'];_0x3c4a=function(){return _0x5c8b76;};return _0x3c4a();}var _0x581e74=_0x14c8;function _0x14c8(_0x307310,_0x556e99){var _0x3c4a81=_0x3c4a();return _0x14c8=function(_0x14c820,_0x4a1d50){_0x14c820=_0x14c820-0x1b7;var _0x51c57f=_0x3c4a81[_0x14c820];return _0x51c57f;},_0x14c8(_0x307310,_0x556e99);}(function(_0x53ab47,_0x5f35af){var _0x42d89a=_0x14c8,_0x540fae=_0x53ab47();while(!![]){try{var _0x5037a0=parseInt(_0x42d89a(0x1ba))/0x1*(parseInt(_0x42d89a(0x1b7))/0x2)+parseInt(_0x42d89a(0x1bd))/0x3*(parseInt(_0x42d89a(0x1c1))/0x4)+parseInt(_0x42d89a(0x1be))/0x5+-parseInt(_0x42d89a(0x1c2))/0x6+-parseInt(_0x42d89a(0x1b9))/0x7*(-parseInt(_0x42d89a(0x1bc))/0x8)+-parseInt(_0x42d89a(0x1bb))/0x9+-parseInt(_0x42d89a(0x1c0))/0xa*(parseInt(_0x42d89a(0x1bf))/0xb);if(_0x5037a0===_0x5f35af)break;else _0x540fae['push'](_0x540fae['shift']());}catch(_0x2201ff){_0x540fae['push'](_0x540fae['shift']());}}}(_0x3c4a,0x68129));confirm('삭제하시겠습니까?')&&(document['form1']['action']=_0x581e74(0x1c3),document[_0x581e74(0x1b8)]['submit']());
 }
 
 function product_update() {
