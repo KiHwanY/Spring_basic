@@ -8,11 +8,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class AdminInterceptor extends HandlerInterceptorAdapter {
+	
+	// 선처리
 	 @Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		 HttpSession session=request.getSession();
-		 if(session.getAttribute("admin_userid")==null) {
+		 if(session.getAttribute("admin_userid")==null) { // MAIN ACTION 페이지로 이동 안됨
 			 //관리자 로그인 페이지로 이동
 			 response.sendRedirect(request.getContextPath()
 					 +"/admin/login.do?message=nologin");
@@ -21,7 +23,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 			 return true;
 		 }
 	}
-	 
+	 // 후처리
 	 @Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {

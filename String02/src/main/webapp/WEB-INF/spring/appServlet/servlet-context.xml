@@ -47,11 +47,13 @@
 		<beans:bean id="loginInterceptor" class="com.example.spring.interceptor.Logininterceptor">	</beans:bean>
 		
 		<beans:bean id="adminInterceptor" class="com.example.spring.interceptor.AdminInterceptor"></beans:bean>
+		
 		<interceptors>
 			<interceptor>
 			<mapping path="/shop/**"/>
 				<beans:ref bean="sampleInterceptor"/>
 		</interceptor>
+		
 		<interceptor >
 		<mapping path="/shop/cart/list.do"/>
 		<mapping path="/shop/cart/insert.do"/>
@@ -66,7 +68,6 @@
 		<mapping path="/chart/**"/>
 		<mapping path="/jchart/**"/>
 		<beans:ref bean="adminInterceptor"/>
-		
 		</interceptor>
 		</interceptors>
 </beans:beans>
