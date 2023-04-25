@@ -8,10 +8,15 @@
 <%@ include file="../include/header.jsp" %>
 <script type="text/javascript">
 $(function() {
-	$("#btnWrite").click(function() {
+	$("#btnWrite").click(function(){
 		location.href="${path}/board/write.do";
 	});
 });
+
+function list(page) {
+	location.href="${path}/board/list.do?curPage="+page;
+}
+
 </script>
 </head>
 <body>
@@ -28,17 +33,51 @@ ${map.count}개의 게시물이 있습니다.
     <th>날짜</th>
     <th>조회수</th>
   </tr>
-  <c:forEach var="row" items="${map.list }">
+ <c:forEach var="row" items="${map.list}">
   <tr>
     <td>${row.bno}</td>
-    <td>${row.title }</td>
-    <td>${row.name }</td>
-    <td>${row.content }</td>
-    <td><fmt:formatDate value="${row.regdate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-    <td>${row.viewcnt }</td>
+    <td><a href="${path }/board/view.do?bno=${row.bno}">${row.title}</a></td>
+    <td>${row.name}</td>
+    <td>${row.content}</td>
+    <td><fmt:formatDate value="${row.regdate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+    <td>${row.viewcnt}</td>
   </tr>
-  </c:forEach>
+ </c:forEach>
+ <!-- 페이지 네비게이션 출력 -->
+	<tr>
+		<td colspan="6" align="center">
+			<c:if test="${map.pager.curBlock > 1}">
+				<a href="#" onclick="list('1')">[처음]</a>
+			</c:if>
+			<c:if test="${map.pager.curBlock > 1}">
+				<a href="#" onclick="list('${map.pager.prevPage}')">
+				[이전]</a>
+			</c:if>
+			<c:forEach var="num" 
+				begin="${map.pager.blockStart}"
+				end="${map.pager.blockEnd}">
+				<c:choose>
+					<c:when test="${num == map.pager.curPage}">
+					<!-- 현재 페이지인 경우 하이퍼링크 제거 -->
+						<span style="color:red;">${num}</span>
+					</c:when>
+					<c:otherwise>
+						<a href="#" onclick="list('${num}')">${num}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${map.pager.curBlock < map.pager.totBlock}">
+				<a href="#" 
+				onclick="list('${map.pager.nextPage}')">[다음]</a>
+			</c:if>
+			<c:if test="${map.pager.curPage < map.pager.totPage}">
+				<a href="#" 
+				onclick="list('${map.pager.totPage}')">[끝]</a>
+			</c:if>
+		</td>
+	</tr>
+ 
+ 
 </table>
-
 </body>
 </html>

@@ -3,8 +3,10 @@ package com.example.spring.service.board;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.spring.model.board.dao.BoardDAO;
 import com.example.spring.model.board.dto.BoardDTO;
@@ -17,14 +19,14 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void deleteFile(String fullName) {
-		// TODO Auto-generated method stub
+		boardDao.deleteFile(fullName);
 
 	}
 
 	@Override
 	public List<String> getAttach(int bno) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return boardDao.getAttach(bno);
 	}
 
 	@Override
@@ -38,16 +40,35 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 
 	}
-
+	//1. 글쓰기 - 게시물 번호 생성
+	//2. 첨부파일 등록 - 게시물 번호 사용
+	//위 두개가 하나의 트랜잭션 단위가 됨
+	@Transactional
 	@Override
 	public void create(BoardDTO dto) throws Exception {
-		boardDao.create(dto);
+		boardDao.create(dto); // board 테이블에 레코드 추가
+		//attach 테이블에 레코드 추가
+		String[] files = dto.getFiles(); // 첨부파일 이름 배열
+		if(files == null) return; // 첨부파일이 없으면 skip
+		for(String name : files) {
+			boardDao.addAttach(name); // attach 테이블에 insert 
+		}
+		
 
 	}
-
+	@Transactional //같이 처리함
 	@Override
 	public void update(BoardDTO dto) throws Exception {
-		// TODO Auto-generated method stub
+		boardDao.update(dto);
+		//별도로 만들었던 파일처리 attach 테이블도 수정해줘야함, 같이 수정 처리함.
+		// service는 transaction 으로 묶기에 좀 더 유리하다.
+		String[] files = dto.getFiles();
+		if(files == null) return;
+		
+		for(String name : files) {
+			System.out.println("첨부파일 이름 :  "+ name );
+			boardDao.updateAttach(name, dto.getBno()); // 기존 번호 get으로 가져옴
+		}
 
 	}
 
@@ -58,26 +79,37 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardDTO> listAll() throws Exception {
-		return boardDao.listAll();
+	public List<BoardDTO> listAll(int start, int end) throws Exception {
+		return boardDao.listAll(start,end);
 	}
 
 	@Override
-	public void increaseViewcnt(int bno) throws Exception {
-		// TODO Auto-generated method stub
+	public void increaseViewcnt(int bno, HttpSession session) throws Exception {
+		long update_time =0;
+		if(session.getAttribute("update_time_"+bno) != null) {
+			//최근에 조회수를 올린 시간
+			update_time=(long)session.getAttribute("update_time_"+bno);
+		}
+		long current_time = System.currentTimeMillis();
+		//일정 시간(5초)이 경과한 후 조회수 증가 처리
+		if(current_time-update_time > 5*1000) { // 24*60*60*100(하루)
+			//조회수 증가 처리
+			boardDao.increaseViewcnt(bno);
+			//조회수를 올린 시간 저장
+			session.setAttribute("update_time_"+bno, current_time);
+		}
 
 	}
 
 	@Override
 	public int countArticle() throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.countArticle();
 	}
 
 	@Override
 	public BoardDTO read(int bno) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return boardDao.read(bno);
 	}
 
 }

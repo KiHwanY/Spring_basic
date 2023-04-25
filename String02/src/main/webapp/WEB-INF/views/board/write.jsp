@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="../include/header.jsp" %>
-<script src="${path}/include/js/common.js"></script>
+<script src="${path}/include/js/common.js"></script> <!-- js 파일  -->
 <!-- ckeditor의 라이브러리 -->
 <script src="${path}/ckeditor/ckeditor.js"></script>
 
