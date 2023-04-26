@@ -14,7 +14,7 @@ public interface BoardDAO {
 	public void create(BoardDTO dto) throws Exception; // 글쓰기 
 	public void update(BoardDTO dto) throws Exception; //글수정
 	public void delete(int bno) throws Exception; // 글 삭제
-	public List<BoardDTO> listAll(int start, int end) throws Exception; // 목록
+	public List<BoardDTO> listAll(String search_option, String keyword, int start, int end) throws Exception; // 목록
 	public void increaseViewcnt(int bno) throws Exception; // 조회수 증가 처리
 	public int countArticle() throws Exception; //레코드 개수 계산
 	public BoardDTO read(int bno) throws Exception; //레코드 조회

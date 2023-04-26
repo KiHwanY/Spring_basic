@@ -34,7 +34,10 @@ public class BoardController {
 	
 	@RequestMapping("list.do") // 세부 url
 	//defaultValue = "1" : 파라미터가 없을 때 1로 셋팅해줌
-	public ModelAndView list(@RequestParam(defaultValue = "1") int curPage) throws Exception{
+	public ModelAndView list(
+			@RequestParam(defaultValue = "name") String search_option,
+			@RequestParam(defaultValue = "") String keyword,
+			@RequestParam(defaultValue = "1") int curPage) throws Exception{
 		//레코드 개수 계산
 		int count = boardService.countArticle();
 		// 페이지 관련 설정
@@ -42,7 +45,7 @@ public class BoardController {
 		int start=pager.getPageBegin();
 		int end =pager.getPageEnd();
 		
-		List<BoardDTO> list=boardService.listAll(start,end); // 게시물 목록
+		List<BoardDTO> list=boardService.listAll(search_option,keyword,start,end); // 게시물 목록
 		logger.info(list.toString());
 		
 		ModelAndView mav = new ModelAndView();
@@ -51,6 +54,8 @@ public class BoardController {
 		map.put("list", list); // map에 자료 저장
 		map.put("count",count); //레코드 갯수 파악
 		map.put("pager", pager); // 페이지 네비게이션을 위한 변수
+		map.put("search_option", search_option);
+		map.put("keyword", keyword);
 		mav.setViewName("board/list"); // 포워딩 뷰
 		mav.addObject("map",map); //전달 데이터
 		return mav;
@@ -100,6 +105,12 @@ public class BoardController {
 		 */
 		//상세 화면으로 되돌아가기
 		return "redirect:/board/view.do?bno="+dto.getBno();
+	}
+	@RequestMapping("delete.do")
+	public String delete(int bno) throws Exception{
+		boardService.delete(bno);
+		
+		return "redirect:/board/list.do";
 	}
 	
 }

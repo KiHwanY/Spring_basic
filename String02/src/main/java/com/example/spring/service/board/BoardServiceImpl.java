@@ -71,16 +71,21 @@ public class BoardServiceImpl implements BoardService {
 		}
 
 	}
-
+	@Transactional
 	@Override
 	public void delete(int bno) throws Exception {
-		// TODO Auto-generated method stub
+		//reply 레코드 삭제
+		//attach
+		//board
+		
+		
+		boardDao.delete(bno);
 
 	}
 
 	@Override
-	public List<BoardDTO> listAll(int start, int end) throws Exception {
-		return boardDao.listAll(start,end);
+	public List<BoardDTO> listAll(String search_option, String keyword,int start, int end) throws Exception {
+		return boardDao.listAll(search_option,keyword,start,end);
 	}
 
 	@Override

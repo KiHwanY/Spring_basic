@@ -13,8 +13,8 @@
 <script>
 $(function(){ //자동으로 실행되는 코드
 	//댓글 목록 출력
-	listReply();
-	//listReply2();
+	//listReply();
+	listReply2();
 	
 	//댓글 쓰기
 	$("#btnReply").click(function(){
@@ -28,8 +28,8 @@ $(function(){ //자동으로 실행되는 코드
 			data: param,
 			success: function(){
 				alert("댓글이 등록되었습니다.");
-				listReply();
-				//listReply2(); //댓글 목록 출력
+				//listReply();
+				listReply2(); //댓글 목록 출력
 			}
 		});
 	});

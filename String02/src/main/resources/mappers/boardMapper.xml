@@ -6,17 +6,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="board">
 	<select id="listAll" resultType="com.example.spring.model.board.dto.BoardDTO">
+	<include refid="paging_header" />
+ 		select bno,title,writer,name,regdate,viewcnt,show
+	    (select count(*) from reply where bno =b.bno) cnt
+	    from board b, member m
+	    <include refid="search" />
+	    order by bno desc
+		<include refid="paging_footer" />
+	</select>
+	
+	<!-- sql태그는 다른 태그에 끼워넣을수 있는 기능을 가지고 있음 -->
+	<sql id="paging_header">
 	select *
 	from ( 
 	    select rownum as rn, A.*
 	    from(
-	    select bno,title,writer,name,regdate,viewcnt
-	    from board b, member m
-	    where b.writer = m.userid
-	    order by bno desc
+	</sql>
+	
+	<sql id="search">
+	<choose>
+	<when test="search_option != 'all' ">
+	where b.writer=m.userid
+	and show ='y'
+	and ${search_option} like #{keyword}
+	</when>
+	<otherwise>
+	where b.writer=m.userid
+	and show='y'
+	and (name like #{keyword} or title like #{keyword} or content like #{keyword})
+	</otherwise>
+	</choose>
+	</sql>
+	<sql id="paging_footer">
 	)A
 	)where rn between #{start} and #{end}
-	</select>
+	</sql>
+	
 	<insert id="insert">
 	insert into board (bno,title,content,writer) values
 (seq_board.nextval,#{title},#{content},#{writer})
@@ -65,6 +90,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	insert into attach (fullName, bno) values
 	(#{fullName}, #{bno})
 	</insert>
+	<!-- 게시물 삭제 -->
+	<delete id="delete">
+	update board set show ='n'  where bno=#{bno}	
+	</delete>
 </mapper>
 
 
