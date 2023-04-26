@@ -23,19 +23,19 @@ function list(page) {
 <%@ include file="../include/menu.jsp" %>
 <h2>게시판</h2>
 <!-- 검색폼 -->
-<form name="form1" method="post" action="${path }/board/list.do">
-<select name="search_option">
-	<option value="name" 
-	<c:if test="${map.search_option == 'name' }" >selected</c:if> >이름</option>
-	<option value="title"
-	 <c:if test="${map.search_option == 'title' }" >selected</c:if> >제목</option>
-	<option value="content"
-	 <c:if test="${map.search_option == 'content' }" >selected</c:if> >내용</option>
-	<option value="all" 
-	<c:if test="${map.search_option == 'all' }" >selected</c:if> >이름+내용+제목</option>
-</select>
-<input name="keyword" value="${map.keyword}">
-<input type="submit" value="조회">
+<form name="form1" method="post" action="${path}/board/list.do">
+ <select name="search_option">
+  <option value="name" 
+   <c:if test="${map.search_option == 'name'}">selected</c:if>>이름</option>
+  <option value="title" 
+   <c:if test="${map.search_option == 'title'}">selected</c:if>>제목</option> 
+  <option value="content" 
+   <c:if test="${map.search_option == 'content'}">selected</c:if>>내용</option> 
+  <option value="all" 
+   <c:if test="${map.search_option == 'all'}">selected</c:if>>이름+내용+제목</option>  
+ </select>
+ <input name="keyword" value="${map.keyword}">
+ <input type="submit" value="조회">
 </form>
 
 <button type="button" id="btnWrite">글쓰기</button>
@@ -51,13 +51,13 @@ ${map.count}개의 게시물이 있습니다.
   </tr>
  <c:forEach var="row" items="${map.list}">
  <c:choose>
- <c:when test="${row.show == 'y' }">
+  <c:when test="${row.show == 'y'}">
   <tr>
     <td>${row.bno}</td>
-    <td><a href="${path }/board/view.do?bno=${row.bno}">${row.title}</a>
-    	<c:if test="${row.cnt > 0 }">
-    	<span style="color: red;">(${row.cnt})</span>
-    	</c:if>
+    <td><a href="${path}/board/view.do?bno=${row.bno}">${row.title}</a>
+     <c:if test="${row.cnt > 0}">
+      <span style="color: red;">(${row.cnt})</span>
+     </c:if>
     </td>
     <td>${row.name}</td>
     <td>${row.content}</td>
@@ -65,7 +65,7 @@ ${map.count}개의 게시물이 있습니다.
     <td>${row.viewcnt}</td>
   </tr>
   </c:when>
-  </c:choose>
+ </c:choose> 
  </c:forEach>
  <!-- 페이지 네비게이션 출력 -->
 	<tr>

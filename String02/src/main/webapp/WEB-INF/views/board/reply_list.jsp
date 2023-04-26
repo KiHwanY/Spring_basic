@@ -10,20 +10,19 @@
 <body>
 <% pageContext.setAttribute("newLineChar", "\n"); %>
 <table style="width: 700px">
-		<c:forEach var="row" items="${list}">
-			<c:set var="str" value="${fn:replace(row.replytext, '<','&lt;') }" />
-			<c:set var="str" value="${fn:replace(str, '>','&gt;') }" />
-			<c:set var="str" value="${fn:replace(str, '  ','&nbsp;&nbsp;') }" />
-			<c:set var="str" value="${fn:replace(str, newLineChar,'<br>') }" />
-		</c:forEach>
-	<tr>
-		<td>
-		${row.name }
-		(<fmt:formatDate value="${row.regdate }" pattern="yyyy-MM-dd a HH:mm:ss" />) <br>
-		${str}
-		</td>
-	
-	</tr>
+<c:forEach var="row" items="${list}">
+ <c:set var="str" value="${fn:replace(row.replytext, '<', '&lt;') }" />
+ <c:set var="str" value="${fn:replace(str, '>', '&gt;') }" />
+ <c:set var="str" value="${fn:replace(str, '  ', '&nbsp;&nbsp;') }" />
+ <c:set var="str" value="${fn:replace(str, newLineChar, '<br>') }" />
+ <tr>
+  <td>
+   ${row.name}
+   (<fmt:formatDate value="${row.regdate}" pattern="yyyy-MM-dd a HH:mm:ss" /> )<br>
+   ${str}
+  </td>
+ </tr>
+</c:forEach>
 
 </table>
 
