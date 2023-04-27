@@ -25,7 +25,8 @@
 	<c:otherwise>
 	<!-- 로그인한 상태 -->
 	${sessionScope.admin_name }님이 로그인중입니다.
-	<a href="${path}/admin/logout.do">로그아웃</a> |
+	<a href="${path}/member/list.do">회원정보</a> |
+	<a href="${path}/admin/logout.do">로그아웃</a> 
 	</c:otherwise>
 	</c:choose>
 	</div>

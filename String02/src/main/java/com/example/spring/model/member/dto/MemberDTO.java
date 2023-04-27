@@ -10,6 +10,29 @@ public class MemberDTO {
 	private String name; 
 	private String email; 
 	private Date join_date;
+	private String zipcode; // 추가 우편번호
+	private String address1; // 추가 도로명 주소
+	private String address2; // 추가 상세 주소
+	
+	
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+	public String getAddress1() {
+		return address1;
+	}
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+	public String getAddress2() {
+		return address2;
+	}
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
 	public String getUserid() {
 		return userid;
 	}
@@ -40,10 +63,12 @@ public class MemberDTO {
 	public void setJoin_date(Date join_date) {
 		this.join_date = join_date;
 	}
+
 	@Override
 	public String toString() {
 		return "MemberDTO [userid=" + userid + ", passwd=" + passwd + ", name=" + name + ", email=" + email
-				+ ", join_date=" + join_date + "]";
+				+ ", join_date=" + join_date + ", zipcode=" + zipcode + ", address1=" + address1 + ", address2="
+				+ address2 + "]";
 	}
 	public MemberDTO() {
 		

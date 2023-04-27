@@ -13,6 +13,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from member
 	where userid=#{userid}
 	</select>
+	<select id="memberlist" resultType="com.example.spring.model.member.dto.MemberDTO">
+	select * from member
+	order by name 
+	</select>
+	<insert id="memberinsert">
+	insert into member(userid,passwd,name,email,zipcode,address1,address2)
+	values(#{userid},#{passwd},#{name},#{email},#{zipcode},#{address1},#{address2})
+	</insert>
+	<update id="updateMember">
+	update member
+	set passwd=#{passwd}, name=#{name}, email=#{email} , 
+	zipcode=#{zipcode},address1=#{address1},address2=#{address2}
+	where userid=#{userid}
+	</update>
+	<!-- 수정용 비밀번호 체크 -->
+	<select id="checkPw" resultType="int">
+	select count(*) from member
+	where userid=#{userid} and passwd=#{passwd}
+	</select>
+	<delete id="deleteMember">
+	delete from member
+	where userid=#{userid}
+	</delete>	
 </mapper>
 
 

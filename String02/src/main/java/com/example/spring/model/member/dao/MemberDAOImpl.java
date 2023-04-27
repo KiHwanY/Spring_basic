@@ -1,5 +1,9 @@
 package com.example.spring.model.member.dao;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,6 +29,43 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberDTO viewMember(String userid) {
 		
 		return sqlSession.selectOne("member.viewMember", userid);
+	}
+
+	@Override
+	public List<MemberDTO> list() {
+		
+		return sqlSession.selectList("member.memberlist");
+	}
+
+	@Override
+	public void insertMember(MemberDTO dto) {
+		sqlSession.insert("member.memberinsert", dto);
+		
+	}
+
+	@Override
+	public boolean checkPw(String userid, String passwd) {
+		boolean result = false;
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("userid", userid);
+		map.put("passwd", passwd);
+		int count=  sqlSession.selectOne("member.checkPw", map);
+		// 비번이 맞으면 (1) , 틀리면(0)
+		if(count == 1) result= true;
+		return result;
+	}
+
+	@Override
+	public void updateMember(MemberDTO dto) {
+	sqlSession.update("member.updateMember", dto);
+		
+	}
+
+	@Override
+	public void deleteMember(String userid) {
+		sqlSession.delete("member.deleteMember", userid);
+		
 	}
 
 }
